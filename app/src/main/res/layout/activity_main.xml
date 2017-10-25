@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--app:wkp_textSize="@dimen/size_16sp"-->
+    <!--app:wkp_itemHeight="80dp"-->
+    <com.wkp.expandview_lib.view.ExpandView
+        android:id="@+id/ev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.wkp.expandview_lib.view.ExpandView>
+
+</LinearLayout>
