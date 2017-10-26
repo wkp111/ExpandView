@@ -34,15 +34,17 @@ public class ExpandView extends GridLayout {
     private static final int DEFAULT_ROW_COUNT = 2;                 //默认初始显示行数
     private static final int DEFAULT_MORE_PIC = R.drawable.ic_more; //默认更多按钮图片
     private static final String DEFAULT_MORE_TEXT = "更多";         //默认更多按钮文本
-    private static final int DEFAULT_MORE_BG = Color.WHITE;         //默认更多按钮背景
+    private static final int DEFAULT_MORE_BG_COLOR = Color.WHITE;   //默认更多按钮背景
+    private static final int DEFAULT_MORE_BG_RES = 0;               //默认更多按钮背景
     private static final int DEFAULT_MORE_TEXT_COLOR = Color.BLACK; //默认更多按钮文本颜色
-    private static final int DEFAULT_MORE_TEXT_SIZE = 16;           //默认更多按钮文本大小
+    private static final int DEFAULT_MORE_TEXT_SIZE = 48;           //默认更多按钮文本大小
     private static final int DEFAULT_VIEW_DURATION = 100;           //默认子条目的动画时长
     private static final int DEFAULT_VIEW_PADDING = 5;              //默认子条目的内间距
     private static final int DEFAULT_VIEW_MARGIN = 5;               //默认子条目的外间距
-    private static final int DEFAULT_VIEW_HEIGHT = 120;             //默认子条目的高度
+    private static final int DEFAULT_VIEW_HEIGHT = 240;             //默认子条目的高度
     private static final int TYPE_ONE = 1;                          //控件类型1
     private static final int TYPE_TWO = 2;                          //控件类型2
+    private static final int DEFAULT_MORE_PADDING = 15;             //默认更多按钮内边距
 
     /**
      * 每行字段数
@@ -65,7 +67,12 @@ public class ExpandView extends GridLayout {
      * 更多按钮背景
      */
     @ColorInt
-    private int mMoreBackground = DEFAULT_MORE_BG;
+    private int mMoreBackgroundColor = DEFAULT_MORE_BG_COLOR;
+    /**
+     * 更多按钮背景
+     */
+    @DrawableRes
+    private int mMoreBackgroundRes = DEFAULT_MORE_BG_RES;
     /**
      * 更多按钮文本颜色
      */
@@ -142,13 +149,14 @@ public class ExpandView extends GridLayout {
             mRowCount = typedArray.getInteger(R.styleable.ExpandView_wkp_rowMin, DEFAULT_ROW_COUNT);
             mViewMargin = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_space,DEFAULT_VIEW_MARGIN * 2) / 2;
             mViewDuration = typedArray.getInteger(R.styleable.ExpandView_wkp_itemDuration, DEFAULT_VIEW_DURATION);
-            mViewHeight = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_itemHeight, DEFAULT_VIEW_HEIGHT);
+            mViewHeight = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_itemHeight, DEFAULT_VIEW_HEIGHT) / 2;
             mMorePic = typedArray.getResourceId(R.styleable.ExpandView_wkp_moreButtonImg, R.drawable.ic_more);
             String moreText = typedArray.getString(R.styleable.ExpandView_wkp_moreButtonText);
             mMoreText = TextUtils.isEmpty(moreText) ? DEFAULT_MORE_TEXT : moreText;
-            mMoreBackground = typedArray.getColor(R.styleable.ExpandView_wkp_textBgColor, DEFAULT_MORE_BG);
+            mMoreBackgroundColor = typedArray.getColor(R.styleable.ExpandView_wkp_textBgColor, DEFAULT_MORE_BG_COLOR);
             mMoreTextColor = typedArray.getColor(R.styleable.ExpandView_wkp_textColor, DEFAULT_MORE_TEXT_COLOR);
-            mMoreTextSize = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_textSize, DEFAULT_MORE_TEXT_SIZE);
+            mMoreTextSize = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_textSize, DEFAULT_MORE_TEXT_SIZE) / 3;
+            mMoreBackgroundRes = typedArray.getResourceId(R.styleable.ExpandView_wkp_textBgRes, 0);
             typedArray.recycle();
         }
     }
@@ -165,7 +173,7 @@ public class ExpandView extends GridLayout {
         setLayoutTransition(transition);
         //创建 更多 按钮
         Drawable leftImg = getResources().getDrawable(mMorePic);
-        mMoreButton = createTextView(mContext, mMoreText, mMoreTextSize, mMoreTextColor, leftImg, mMoreBackground, mViewPadding, mViewMargin);
+        mMoreButton = createTextView(mContext, mMoreText, mMoreTextSize, mMoreTextColor, leftImg, mMoreBackgroundColor, DEFAULT_MORE_PADDING, mViewMargin);
         mMoreButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +215,7 @@ public class ExpandView extends GridLayout {
         view.setLayoutParams(params);
         view.setGravity(Gravity.CENTER);
         view.setBackgroundColor(bgColor);
+        view.setBackgroundResource(mMoreBackgroundRes);
         return view;
     }
 
@@ -244,7 +253,7 @@ public class ExpandView extends GridLayout {
                 View view;
                 final int position = j;
                 if (mCurrentType == TYPE_ONE) {
-                    view = createTextView(mContext, (String) items.get(j), mMoreTextSize, mMoreTextColor, null, mMoreBackground, mViewPadding, mViewMargin);
+                    view = createTextView(mContext, (String) items.get(j), mMoreTextSize, mMoreTextColor, null, mMoreBackgroundColor, mViewPadding, mViewMargin);
                 } else {
                     int widthPixels = getResources().getDisplayMetrics().widthPixels;
                     view = (View) items.get(j);
@@ -451,8 +460,22 @@ public class ExpandView extends GridLayout {
      * @return ExpandView 用于链式编程
      */
     public ExpandView setTextBgColor(@ColorInt int textBgColor) {
-        mMoreBackground = textBgColor;
-        mMoreButton.setBackgroundColor(mMoreBackground);
+        mMoreBackgroundColor = textBgColor;
+        mMoreButton.setBackgroundColor(mMoreBackgroundColor);
+        if (mItemsTypeOne.size() > 0) {
+            addItems(mItemsTypeOne);
+        }
+        return this;
+    }
+
+    /**
+     * 设置文本模式时的条目背景图
+     * @param textBgRes 背景图
+     * @return ExpandView 用于链式编程
+     */
+    public ExpandView setTextBgRes(@DrawableRes int textBgRes) {
+        mMoreBackgroundRes = textBgRes;
+        mMoreButton.setBackgroundResource(mMoreBackgroundRes);
         if (mItemsTypeOne.size() > 0) {
             addItems(mItemsTypeOne);
         }

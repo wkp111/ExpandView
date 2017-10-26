@@ -21,5 +21,7 @@
         <attr name="wkp_textColor" format="color"/>
         <!--显示文本模式时的文本大小-->
         <attr name="wkp_textSize" format="dimension"/>
+        <!--显示文本模式时的条目背景图-->
+        <attr name="wkp_textBgRes" format="reference"/>
     </declare-styleable>
 </resources>
