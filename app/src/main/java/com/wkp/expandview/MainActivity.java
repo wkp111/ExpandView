@@ -17,11 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final ExpandView expandView = (ExpandView) findViewById(R.id.ev);
+        //设置数据
         expandView.setTextItems(items);
+        //条目点击监听
         expandView.setOnItemClickListener(new ExpandView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, ViewGroup parent, int position) {
                 if (position == items.length - 1) {
+                    //收起隐藏条目
                     expandView.packUpItems();
                 }
             }

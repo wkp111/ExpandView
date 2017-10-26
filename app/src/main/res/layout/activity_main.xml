@@ -9,12 +9,14 @@
 
     <com.wkp.expandview_lib.view.ExpandView
         app:wkp_textSize="@dimen/size_16sp"
-        app:wkp_column="4"
-        app:wkp_rowMin="2"
+        app:wkp_column="3"
+        app:wkp_rowMin="3"
         app:wkp_itemHeight="120dp"
         app:wkp_textBgRes="@drawable/text_bg"
         android:id="@+id/ev"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.wkp.expandview_lib.view.ExpandView>
+        android:layout_height="wrap_content">
+
+    </com.wkp.expandview_lib.view.ExpandView>
 
 </LinearLayout>
