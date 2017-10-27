@@ -9,7 +9,7 @@
 <br/>
 <br/>
 ## Gradle集成<br>
-compile 'com.wkp:ExpandView:1.0.1'
+compile 'com.wkp:ExpandView:1.0.2'
 <br>
 <br>
 ## 使用详解<br/>
@@ -76,8 +76,11 @@ compile 'com.wkp:ExpandView:1.0.1'
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String[] items = {"雨水滴在我的外套","已找到","每分每秒","来啊，互相伤害啊","等你到天涯海角","遇见了你才知道你对我多重要",
-            "123","456","789","abc","def","收起"};
+    private static final String[] items = {"雨水滴在我的外套", "已找到", "每分每秒", "来啊，互相伤害啊", "等你到天涯海角", "遇见了你才知道你对我多重要",
+            "123", "456", "789", "abc", "def", "收起"};
+
+    private static final String[] items1 = {"雨水滴在我的外套1", "已找到1", "每分每秒1", "来啊，互相伤害啊1", "等你到天涯海角1", "遇见了你才知道你对我多重要1",
+            "123", "456", "789", "abc1", "def1", "收起1"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         final ExpandView expandView = (ExpandView) findViewById(R.id.ev);
         //设置数据
         expandView.setTextItems(items);
+        //测试当在ListView中条目复用问题
+        expandView.setTextItems(items1);
+        //测试未展开下调用收起的效果
+        expandView.packUpItems();
         //条目点击监听
         expandView.setOnItemClickListener(new ExpandView.OnItemClickListener() {
             @Override
@@ -97,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
- } 
+}
  
 `
 <br/>
@@ -108,3 +115,10 @@ public class MainActivity extends AppCompatActivity {
 QQ邮箱：1535514884@qq.com<br/>
 163邮箱：15889686524@163.com<br/>
 Gmail邮箱：wkp15889686524@gmail.com
+
+<br/>
+## 版本更新<br/>
+* v1.0.2<br/>
+修复因为条目复用引起的BUG<br/><br/>
+* v1.0.1<br/>
+新创建展开控件库
