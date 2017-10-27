@@ -1,4 +1,4 @@
-# ExpandView
+# ExpandView [![Download](https://api.bintray.com/packages/dlazaro66/maven/QRCodeReaderView/images/download.svg) ](https://bintray.com/dlazaro66/maven/QRCodeReaderView/_latestVersion)
 展开控件，点击更多展开
 <br/>
 <br/>
@@ -14,7 +14,7 @@ compile 'com.wkp:ExpandView:1.0.2'
 <br>
 ## 使用详解<br/>
 > 属性讲解<br/>
-`
+```
 
         <!--每行字段数-->
         <attr name="wkp_column" format="integer"/>
@@ -38,10 +38,10 @@ compile 'com.wkp:ExpandView:1.0.2'
         <attr name="wkp_textSize" format="dimension"/>
         <!--显示文本模式时的条目背景图-->
         <attr name="wkp_textBgRes" format="reference"/>
-`
+```
 <br/>
 > 布局<br/>
-`
+```
 
     图1布局
     <com.wkp.expandview_lib.view.ExpandView
@@ -69,10 +69,10 @@ compile 'com.wkp:ExpandView:1.0.2'
         android:layout_height="wrap_content">
         
     </com.wkp.expandview_lib.view.ExpandView>
-`
+```
 <br/>
 > 代码示例<br/>
-`
+```
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
- 
-`
+```
+
 <br/>
 ## 寄语<br/>
 控件支持直接代码创建，还有更多API请观看<a href="https://github.com/wkp111/ExpandView/blob/master/expandview-lib/src/main/java/com/wkp/expandview_lib/view/ExpandView.java">ExpandView.java</a>内的注释说明。<br/>
@@ -114,11 +114,27 @@ public class MainActivity extends AppCompatActivity {
 大家如果有更好的意见或建议以及好的灵感，请邮箱作者，谢谢！<br/>
 QQ邮箱：1535514884@qq.com<br/>
 163邮箱：15889686524@163.com<br/>
-Gmail邮箱：wkp15889686524@gmail.com
+Gmail邮箱：wkp15889686524@gmail.com<br/>
 
-<br/>
 ## 版本更新<br/>
 * v1.0.2<br/>
 修复因为条目复用引起的BUG<br/><br/>
 * v1.0.1<br/>
-新创建展开控件库
+新创建展开控件库<br/>
+## License
+
+   Copyright 2017 wkp
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
