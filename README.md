@@ -10,9 +10,12 @@
 <br/>
 ## Gradle集成<br>
 ```groovy
-compile 'com.wkp:ExpandView:1.0.2'
+
+dependencies{
+      compile 'com.wkp:ExpandView:1.0.2'
+} 
 ```
-<br>
+Note：可能存在Jcenter还在审核阶段，这时会集成失败！
 <br>
 ## 使用详解<br/>
 > 属性讲解<br/>
@@ -41,9 +44,9 @@ compile 'com.wkp:ExpandView:1.0.2'
         <!--显示文本模式时的条目背景图-->
         <attr name="wkp_textBgRes" format="reference"/>
 ```
+Note：每个属性都有对应的java设置代码！
 <br/>
 > 布局<br/>
-图1布局<br/>
 
 ```xml
     <com.wkp.expandview_lib.view.ExpandView
@@ -58,8 +61,8 @@ compile 'com.wkp:ExpandView:1.0.2'
 
     </com.wkp.expandview_lib.view.ExpandView>
 ```
+Note：对应图1布局
 <br/>
-图2布局<br/>
 
 ```xml
     <com.wkp.expandview_lib.view.ExpandView
@@ -74,7 +77,7 @@ compile 'com.wkp:ExpandView:1.0.2'
         
     </com.wkp.expandview_lib.view.ExpandView>
 ```
-
+Note：对应图2布局
 <br/>
 > 代码示例<br/>
 
@@ -111,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
-
+Note：还有其他API请根据需要自行参考！
 <br/>
 ## 寄语<br/>
 控件支持直接代码创建，还有更多API请观看<a href="https://github.com/wkp111/ExpandView/blob/master/expandview-lib/src/main/java/com/wkp/expandview_lib/view/ExpandView.java">ExpandView.java</a>内的注释说明。<br/>
