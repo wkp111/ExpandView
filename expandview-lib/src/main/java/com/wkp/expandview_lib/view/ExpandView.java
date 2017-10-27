@@ -118,6 +118,10 @@ public class ExpandView extends GridLayout {
      * 当前控件类型
      */
     private int mCurrentType = TYPE_ONE;
+    /**
+     * 总宽度
+     */
+    private int mTotalWidth;
     private Context mContext;
     private OnItemClickListener mListener;
 
@@ -136,6 +140,27 @@ public class ExpandView extends GridLayout {
         init();
     }
 
+    //解决控件宽度变化问题
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        mTotalWidth = MeasureSpec.getSize(widthSpec);
+        super.onMeasure(widthSpec, heightSpec);
+    }
+
+    //解决设置数据方法先于onMeasure执行的问题
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        for (int i = 0; i < getChildCount(); i++) {
+            LinearLayout linearLayout = (LinearLayout) getChildAt(i);
+            for (int j = 0; j < linearLayout.getChildCount(); j++) {
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getChildAt(j).getLayoutParams();
+                layoutParams.width = mTotalWidth / mColumnCount - mViewMargin * 2;
+                linearLayout.getChildAt(j).setLayoutParams(layoutParams);
+            }
+        }
+    }
+
     /**
      * 初始化参数
      *
@@ -147,7 +172,7 @@ public class ExpandView extends GridLayout {
         if (typedArray != null) {
             mColumnCount = typedArray.getInteger(R.styleable.ExpandView_wkp_column, DEFAULT_COLUMN_COUNT);
             mRowCount = typedArray.getInteger(R.styleable.ExpandView_wkp_rowMin, DEFAULT_ROW_COUNT);
-            mViewMargin = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_space,DEFAULT_VIEW_MARGIN * 2) / 2;
+            mViewMargin = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_space, DEFAULT_VIEW_MARGIN * 2) / 2;
             mViewDuration = typedArray.getInteger(R.styleable.ExpandView_wkp_itemDuration, DEFAULT_VIEW_DURATION);
             mViewHeight = typedArray.getDimensionPixelSize(R.styleable.ExpandView_wkp_itemHeight, DEFAULT_VIEW_HEIGHT) / 2;
             mMorePic = typedArray.getResourceId(R.styleable.ExpandView_wkp_moreButtonImg, R.drawable.ic_more);
@@ -171,6 +196,7 @@ public class ExpandView extends GridLayout {
         LayoutTransition transition = new LayoutTransition();
         transition.setDuration(mViewDuration);
         setLayoutTransition(transition);
+        mTotalWidth = getResources().getDisplayMetrics().widthPixels;
         //创建 更多 按钮
         Drawable leftImg = getResources().getDrawable(mMorePic);
         mMoreButton = createTextView(mContext, mMoreText, mMoreTextSize, mMoreTextColor, leftImg, mMoreBackgroundColor, DEFAULT_MORE_PADDING, mViewMargin);
@@ -202,8 +228,7 @@ public class ExpandView extends GridLayout {
         view.setTextSize(ViewUtil.dspForPx(context, textSize));
         padding = ViewUtil.dspForPx(context, padding);
         margin = ViewUtil.dspForPx(context, margin);
-        int widthPixels = getResources().getDisplayMetrics().widthPixels;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthPixels / mColumnCount - margin * 2, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mTotalWidth / mColumnCount - margin * 2, LinearLayout.LayoutParams.MATCH_PARENT);
         if (leftImg != null) {
             view.setPadding(3 * padding, padding, padding, padding);
             leftImg.setBounds(0, 0, leftImg.getMinimumWidth(), leftImg.getMinimumHeight());
@@ -245,6 +270,9 @@ public class ExpandView extends GridLayout {
      * @param items
      */
     private <T> void addItems(@NonNull List<T> items) {
+        for (int i = 0; i < getChildCount(); i++) {
+            ((ViewGroup) getChildAt(i)).removeAllViews();
+        }
         removeAllViews();
         mRowTotal = items.size() / ((float) mColumnCount) > items.size() / mColumnCount ? items.size() / mColumnCount + 1 : items.size() / mColumnCount;
         for (int i = 0; i < mRowTotal; i++) {
@@ -255,10 +283,9 @@ public class ExpandView extends GridLayout {
                 if (mCurrentType == TYPE_ONE) {
                     view = createTextView(mContext, (String) items.get(j), mMoreTextSize, mMoreTextColor, null, mMoreBackgroundColor, mViewPadding, mViewMargin);
                 } else {
-                    int widthPixels = getResources().getDisplayMetrics().widthPixels;
                     view = (View) items.get(j);
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-                    params.width = widthPixels / mColumnCount - params.leftMargin - params.rightMargin;
+                    params.width = mTotalWidth / mColumnCount - params.leftMargin - params.rightMargin;
                     params.height = LinearLayout.LayoutParams.MATCH_PARENT;
                     int margin = ViewUtil.dspForPx(mContext, mViewMargin);
                     params.setMargins(margin, 0, margin, 0);
@@ -285,17 +312,28 @@ public class ExpandView extends GridLayout {
      * 展开隐藏条目
      */
     private void expandItems() {
-        ((LinearLayout) getChildAt(mRowCount - 1)).removeView(mMoreButton);
+        LinearLayout linearLayout = (LinearLayout) getChildAt(mRowCount - 1);
+        if (linearLayout.indexOfChild(mMoreButton) != -1) {
+            linearLayout.removeView(mMoreButton);
+        }
         for (int i = mRowCount; i < getChildCount(); i++) {
             getChildAt(i).setVisibility(VISIBLE);
         }
     }
 
+
+    //TODO 公共API
+    /*---------------------------------------------------------------以下为公共API---------------------------------------------------------------------------*/
+
+
     /**
      * 收起隐藏条目
      */
     public void packUpItems() {
-        ((LinearLayout) getChildAt(mRowCount - 1)).addView(mMoreButton, mColumnCount - 1);
+        LinearLayout linearLayout = (LinearLayout) getChildAt(mRowCount - 1);
+        if (linearLayout.indexOfChild(mMoreButton) == -1) {
+            linearLayout.addView(mMoreButton, mColumnCount - 1);
+        }
         for (int i = mRowCount; i < getChildCount(); i++) {
             getChildAt(i).setVisibility(GONE);
         }
@@ -387,6 +425,7 @@ public class ExpandView extends GridLayout {
 
     /**
      * 设置条目动画时长
+     *
      * @param duration 动画时长
      * @return ExpandView 用于链式编程
      */
@@ -470,6 +509,7 @@ public class ExpandView extends GridLayout {
 
     /**
      * 设置文本模式时的条目背景图
+     *
      * @param textBgRes 背景图
      * @return ExpandView 用于链式编程
      */
