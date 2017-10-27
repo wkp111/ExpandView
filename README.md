@@ -14,8 +14,8 @@ compile 'com.wkp:ExpandView:1.0.2'
 <br>
 ## 使用详解<br/>
 > 属性讲解<br/>
-```
 
+```xml
         <!--每行字段数-->
         <attr name="wkp_column" format="integer"/>
         <!--最少显示行数-->
@@ -41,9 +41,9 @@ compile 'com.wkp:ExpandView:1.0.2'
 ```
 <br/>
 > 布局<br/>
-```
+图1布局
+```xml
 
-    图1布局
     <com.wkp.expandview_lib.view.ExpandView
         app:wkp_textSize="@dimen/size_16sp"
         app:wkp_column="3"
@@ -55,9 +55,10 @@ compile 'com.wkp:ExpandView:1.0.2'
         android:layout_height="wrap_content">
 
     </com.wkp.expandview_lib.view.ExpandView>
-
-
-    图2布局
+```
+<br/>
+图2布局
+```xml
     <com.wkp.expandview_lib.view.ExpandView
         app:wkp_textSize="@dimen/size_16sp"
         app:wkp_column="4"
@@ -71,9 +72,10 @@ compile 'com.wkp:ExpandView:1.0.2'
     </com.wkp.expandview_lib.view.ExpandView>
 ```
 <br/>
-> 代码示例<br/>
-```
 
+> 代码示例<br/>
+
+```java
 public class MainActivity extends AppCompatActivity {
 
     private static final String[] items = {"雨水滴在我的外套", "已找到", "每分每秒", "来啊，互相伤害啊", "等你到天涯海角", "遇见了你才知道你对我多重要",
