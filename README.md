@@ -9,7 +9,9 @@
 <br/>
 <br/>
 ## Gradle集成<br>
+```groovy
 compile 'com.wkp:ExpandView:1.0.2'
+```
 <br>
 <br>
 ## 使用详解<br/>
@@ -41,9 +43,9 @@ compile 'com.wkp:ExpandView:1.0.2'
 ```
 <br/>
 > 布局<br/>
-图1布局
-```xml
+图1布局<br/>
 
+```xml
     <com.wkp.expandview_lib.view.ExpandView
         app:wkp_textSize="@dimen/size_16sp"
         app:wkp_column="3"
@@ -57,7 +59,8 @@ compile 'com.wkp:ExpandView:1.0.2'
     </com.wkp.expandview_lib.view.ExpandView>
 ```
 <br/>
-图2布局
+图2布局<br/>
+
 ```xml
     <com.wkp.expandview_lib.view.ExpandView
         app:wkp_textSize="@dimen/size_16sp"
@@ -71,8 +74,8 @@ compile 'com.wkp:ExpandView:1.0.2'
         
     </com.wkp.expandview_lib.view.ExpandView>
 ```
-<br/>
 
+<br/>
 > 代码示例<br/>
 
 ```java
