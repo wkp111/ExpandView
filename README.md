@@ -1,4 +1,4 @@
-# ExpandView [![Download](https://api.bintray.com/packages/dlazaro66/maven/QRCodeReaderView/images/download.svg) ](https://bintray.com/dlazaro66/maven/QRCodeReaderView/_latestVersion)
+# ExpandView [ ![Download](https://api.bintray.com/packages/wkp/maven/ExpandView/images/download.svg) ](https://bintray.com/wkp/maven/ExpandView/_latestVersion)
 展开控件，点击更多展开
 <br/>
 <br/>
