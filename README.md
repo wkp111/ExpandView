@@ -12,7 +12,7 @@
 ```groovy
 
 dependencies{
-      compile 'com.wkp:ExpandView:1.0.2'
+      compile 'com.wkp:ExpandView:1.0.3'
 } 
 ```
 Note：可能存在Jcenter还在审核阶段，这时会集成失败！
@@ -125,6 +125,8 @@ QQ邮箱：1535514884@qq.com<br/>
 Gmail邮箱：wkp15889686524@gmail.com<br/>
 
 ## 版本更新<br/>
+* v1.0.3<br/>
+修复在条目复用中部分条目不等宽的BUG<br/><br/>
 * v1.0.2<br/>
 修复因为条目复用引起的BUG<br/><br/>
 * v1.0.1<br/>
