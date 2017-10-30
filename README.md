@@ -12,7 +12,7 @@
 ```groovy
 
 dependencies{
-      compile 'com.wkp:ExpandView:1.0.3'
+      compile 'com.wkp:ExpandView:1.0.4'
 } 
 ```
 Note：可能存在Jcenter还在审核阶段，这时会集成失败！
@@ -27,7 +27,7 @@ Note：可能存在Jcenter还在审核阶段，这时会集成失败！
         <attr name="wkp_rowMin" format="integer"/>
         <!--条目间距-->
         <attr name="wkp_space" format="dimension"/>
-        <!--条目动画时长-->
+        <!--条目动画时长,0为无动画-->
         <attr name="wkp_itemDuration" format="integer"/>
         <!--条目高度-->
         <attr name="wkp_itemHeight" format="dimension"/>
@@ -125,6 +125,8 @@ QQ邮箱：1535514884@qq.com<br/>
 Gmail邮箱：wkp15889686524@gmail.com<br/>
 
 ## 版本更新<br/>
+* v1.0.4<br/>
+改善wkp_itemDuration属性，允许设置无动画<br/><br/>
 * v1.0.3<br/>
 修复在条目复用中部分条目不等宽的BUG<br/><br/>
 * v1.0.2<br/>
