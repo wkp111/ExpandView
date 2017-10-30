@@ -7,7 +7,7 @@
         <attr name="wkp_rowMin" format="integer"/>
         <!--条目间距-->
         <attr name="wkp_space" format="dimension"/>
-        <!--条目动画时长-->
+        <!--条目动画时长,0为无动画-->
         <attr name="wkp_itemDuration" format="integer"/>
         <!--条目高度-->
         <attr name="wkp_itemHeight" format="dimension"/>

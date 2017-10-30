@@ -187,6 +187,7 @@ public class ExpandView extends GridLayout {
         //设置每行字段数
         super.setColumnCount(1);
         //设置布局动画效果
+        mViewDuration = mViewDuration < 0 ? 0 : mViewDuration;
         LayoutTransition transition = new LayoutTransition();
         transition.setDuration(mViewDuration);
         setLayoutTransition(transition);
@@ -420,11 +421,11 @@ public class ExpandView extends GridLayout {
     /**
      * 设置条目动画时长
      *
-     * @param duration 动画时长
+     * @param duration 动画时长，默认100，0为无动画
      * @return ExpandView 用于链式编程
      */
     public ExpandView setItemDuration(int duration) {
-        duration = duration <= 0 ? 1 : duration;
+        duration = duration <= 0 ? 0 : duration;
         mViewDuration = duration;
         init();
         return this;

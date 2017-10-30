@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 final ExpandView expandView = holder.getView(R.id.ev, ExpandView.class);
                 //设置数据
                 expandView.setTextItems(items);
+                expandView.setItemDuration(0);
                 //测试当在ListView中条目复用问题
 //                expandView.setTextItems(items1);
                 //测试未展开下调用收起的效果
