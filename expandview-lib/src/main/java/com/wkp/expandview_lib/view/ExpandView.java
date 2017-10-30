@@ -144,13 +144,6 @@ public class ExpandView extends GridLayout {
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         mTotalWidth = MeasureSpec.getSize(widthSpec);
-        super.onMeasure(widthSpec, heightSpec);
-    }
-
-    //解决设置数据方法先于onMeasure执行的问题
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
         for (int i = 0; i < getChildCount(); i++) {
             LinearLayout linearLayout = (LinearLayout) getChildAt(i);
             for (int j = 0; j < linearLayout.getChildCount(); j++) {
@@ -159,6 +152,7 @@ public class ExpandView extends GridLayout {
                 linearLayout.getChildAt(j).setLayoutParams(layoutParams);
             }
         }
+        super.onMeasure(widthSpec, heightSpec);
     }
 
     /**

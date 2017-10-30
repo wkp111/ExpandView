@@ -5,18 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <com.wkp.expandview_lib.view.ExpandView
-        app:wkp_textSize="@dimen/size_16sp"
-        app:wkp_column="3"
-        app:wkp_rowMin="3"
-        app:wkp_itemHeight="120dp"
-        app:wkp_textBgRes="@drawable/text_bg"
-        android:id="@+id/ev"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content">
+    <TextView
+        android:text="你好"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
 
-    </com.wkp.expandview_lib.view.ExpandView>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>

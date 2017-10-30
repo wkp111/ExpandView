@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import com.wkp.expandview_lib.view.ExpandView;
 
@@ -19,21 +21,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ExpandView expandView = (ExpandView) findViewById(R.id.ev);
-        //设置数据
-        expandView.setTextItems(items);
-        //测试当在ListView中条目复用问题
-        expandView.setTextItems(items1);
-        //测试未展开下调用收起的效果
-        expandView.packUpItems();
-        //条目点击监听
-        expandView.setOnItemClickListener(new ExpandView.OnItemClickListener() {
+        ListView lv = (ListView) findViewById(R.id.lv);
+        lv.setAdapter(new BaseAdapter() {
             @Override
-            public void onItemClick(View view, ViewGroup parent, int position) {
-                if (position == items.length - 1) {
-                    //收起隐藏条目
-                    expandView.packUpItems();
-                }
+            public int getCount() {
+                return 7;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                ViewHolder holder = ViewHolder.newInstance(parent.getContext(), convertView, R.layout.item_lv);
+                final ExpandView expandView = holder.getView(R.id.ev, ExpandView.class);
+                //设置数据
+                expandView.setTextItems(items);
+                //测试当在ListView中条目复用问题
+//                expandView.setTextItems(items1);
+                //测试未展开下调用收起的效果
+//                expandView.packUpItems();
+                //条目点击监听
+                expandView.setOnItemClickListener(new ExpandView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, ViewGroup parent, int position) {
+                        if (position == items.length - 1) {
+                            //收起隐藏条目
+                            expandView.packUpItems();
+                        }
+                    }
+                });
+                return holder.mConvertView;
             }
         });
     }
